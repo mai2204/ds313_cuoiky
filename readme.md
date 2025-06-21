@@ -152,8 +152,8 @@ python SHAS/src/eval_scripts/score_translation.py ./
 
 ## Tài liệu tham khảo
 
-- SHAS Paper: [Approaching Optimal Segmentation for End-to-End Speech Translation (ACL 2022)](https://aclanthology.org/2022.acl-long.403)
+- SHAS Paper: [Approaching Optimal Segmentation for End-to-End Speech Translation (ACL 2022)](https://arxiv.org/abs/2202.04774)
 - [mTEDx Dataset](https://www.openslr.org/100)
-- [Fairseq](https://github.com/pytorch/fairseq)
+- [Fairseq](https://github.com/mt-upc/fairseq)
 
 ---
