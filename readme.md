@@ -1,10 +1,10 @@
-# 🧪 SHAS Pipeline for Speech Segmentation and Translation (fr-en)
+# SHAS Pipeline for Speech Segmentation and Translation (fr-en)
 
 This project replicates the **SHAS (Supervised Hybrid Audio Segmentation)** pipeline to train a speech segmentation model and evaluate **speech-to-text translation quality** for the **French-English (fr-en)** pair using the **mTEDx** dataset.
 
 ---
 
-## 📌 Mục tiêu / Objectives
+## Mục tiêu / Objectives
 
 - Huấn luyện mô hình phân đoạn lời nói đầu vào dựa trên `wav2vec2`.
 - Dịch lời nói sang văn bản (Speech Translation) sử dụng mô hình `joint-s2t-multilingual`.
@@ -12,7 +12,7 @@ This project replicates the **SHAS (Supervised Hybrid Audio Segmentation)** pipe
 
 ---
 
-## 🔧 1. Thiết lập môi trường trên Kaggle
+## 1. Thiết lập môi trường trên Kaggle
 
 > Sử dụng Micromamba để tạo môi trường Python 3.9 và cài các thư viện cần thiết:
 
@@ -27,7 +27,7 @@ curl -Ls https://micro.mamba.pm/api/micromamba/linux-64/latest | tar -xvj bin/mi
 
 ---
 
-## 📁 2. Clone SHAS và fairseq
+## 2. Clone SHAS và fairseq
 
 ```bash
 git clone https://github.com/mt-upc/SHAS.git
@@ -43,7 +43,7 @@ cd /kaggle/working/models/fairseq_root
 
 ---
 
-## 📦 3. Tải mô hình dịch đã huấn luyện (joint-s2t-multilingual)
+## 3. Tải mô hình dịch đã huấn luyện (joint-s2t-multilingual)
 
 ```bash
 cd /kaggle/working/models
@@ -55,7 +55,7 @@ wget https://dl.fbaipublicfiles.com/.../checkpoint17.pt -O joint-s2t-multilingua
 
 ---
 
-## 🧩 4. Cập nhật đường dẫn và sửa cấu hình
+## 4. Cập nhật đường dẫn và sửa cấu hình
 
 ```bash
 # Sửa đường dẫn đến spm.model
@@ -67,14 +67,14 @@ python SHAS/src/data_prep/fix_joint_s2t_cfg.py -c joint-s2t-multilingual/checkpo
 
 ---
 
-## 🎧 5. Chuẩn hóa dữ liệu âm thanh
+## 5. Chuẩn hóa dữ liệu âm thanh
 
 - Convert từ `.flac` ➝ `.wav` (mono, 16kHz) **ở Colab hoặc máy cá nhân** vì Kaggle không hỗ trợ ghi đè `input/`.
 - Tải lại vào Kaggle Dataset.
 
 ---
 
-## 🗂 6. Chuẩn bị dữ liệu phân đoạn
+## 6. Chuẩn bị dữ liệu phân đoạn
 
 ```bash
 # Thực thi 3 lần với split: train, valid, test
@@ -86,7 +86,7 @@ python SHAS/src/data_prep/prepare_dataset_for_segmentation.py \
 
 ---
 
-## 🏋️‍♀️ 7. Huấn luyện mô hình phân đoạn
+## 7. Huấn luyện mô hình phân đoạn
 
 ```bash
 python SHAS/src/supervised_hybrid/train.py \
@@ -100,7 +100,7 @@ python SHAS/src/supervised_hybrid/train.py \
 
 ---
 
-## ✂️ 8. Phân đoạn lời nói với mô hình đã huấn luyện
+## 8. Phân đoạn lời nói với mô hình đã huấn luyện
 
 ```bash
 python SHAS/src/supervised_hybrid/segment.py \
@@ -112,7 +112,7 @@ python SHAS/src/supervised_hybrid/segment.py \
 
 ---
 
-## 🧪 9. Chuẩn bị đầu vào cho đánh giá BLEU
+## 9. Chuẩn bị đầu vào cho đánh giá BLEU
 
 ```python
 from SHAS.src.eval_scripts.prepare_custom_dataset import prepare_custom_dataset
@@ -125,7 +125,7 @@ prepare_custom_dataset(
 
 ---
 
-## 📊 10. Đánh giá bằng MWER và BLEU (chạy local)
+## 10. Đánh giá bằng MWER và BLEU (chạy local)
 
 > Phần này yêu cầu **Python 2.7** và **mwerSegmenter** (không thể thực hiện trên Kaggle).
 
@@ -150,15 +150,7 @@ python SHAS/src/eval_scripts/score_translation.py ./
 
 ---
 
-## ✅ Kết quả
-
-| Mô hình        | Dataset      | BLEU  |
-|----------------|--------------|-------|
-| SHAS (fr-en)   | mTEDx-test   | TBD   |
-
----
-
-## 📚 Tài liệu tham khảo
+## Tài liệu tham khảo
 
 - SHAS Paper: [Approaching Optimal Segmentation for End-to-End Speech Translation (ACL 2022)](https://aclanthology.org/2022.acl-long.403)
 - [mTEDx Dataset](https://www.openslr.org/100)
